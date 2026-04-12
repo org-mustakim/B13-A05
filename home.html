@@ -56,10 +56,10 @@
 
     </header>
 
-    <section class="w-full md:px-60  md:my-16 max-w-screen-2xl mx-auto">
+    <section class="w-full md:px-60  md:mt-16 max-w-screen-2xl mx-auto">
 
 
-        <div class="p-6 rounded-lg border-[0.25px] border-gray-300/60 shadow-sm">
+        <div class="p-6 rounded-lg border-[0.25px] border-[#e4e4e7] shadow-sm">
 
 
             <div
@@ -67,11 +67,11 @@
 
 
                 <button id="btn-1" onclick="activeBtn('btn-1')"
-                    class="clickable-btn btn btn-primary w-24 max-md:w-[120px] font-semibold shadow-md">All</button>
+                    class="clickable-btn btn btn-primary w-24 max-md:w-[120px] font-semibold">All</button>
                 <button id="btn-2" onclick="activeBtn('btn-2')"
-                    class="clickable-btn btn btn-outline w-24 max-md:w-[120px] font-semibold shadow-md">Open</button>
+                    class="clickable-btn btn btn-outline w-24 max-md:w-[120px] font-semibold">Open</button>
                 <button id="btn-3" onclick="activeBtn('btn-3')"
-                    class="clickable-btn btn btn-outline w-24 max-md:w-[120px] font-semibold shadow-md">Closed</button>
+                    class="clickable-btn btn btn-outline w-24 max-md:w-[120px] font-semibold">Closed</button>
 
 
             </div>
@@ -82,6 +82,48 @@
 
     </section>
 
+    <section class="w-full md:px-60  md:mt-4 max-w-screen-2xl mx-auto">
+
+
+        <div
+            class="flex flex-wrap justify-between border p-6 border-[#e4e4e7] rounded-t-lg gap-0 md:gap-4 max-md:gap-8">
+            <div class="flex flex-wrap gap-2">
+
+                <div class="bg-[#ece4ff] w-[50px] p-2 rounded-full flex justify-center items-center">
+                    <img src="assets/Aperture.png" alt="">
+                </div>
+
+                <div class="gap-1">
+                    <h2 class="text-[#1f2937] text-xl font-semibold"><span id="total-issue-in-container">0</span>
+                        Issues
+                    </h2>
+                    <p class="text-base text-[#64748b]">Track and manage your project issues</p>
+                </div>
+            </div>
+
+            <div class="flex max-lg:w-full max-lg:items-center gap-4 max-lg:gap-6 flex-wrap md:ml-[4px] max-sm:ml-14">
+                <div class="flex items-center justify-center gap-2">
+                    <div class="bg-[#00a96e] w-3 h-3 rounded-full"></div>
+                    <p class="text-base font-medium">Open</p>
+                </div>
+
+
+                <div class="flex items-center gap-2">
+                    <div class="bg-[#a855f7] w-3 h-3 rounded-full"></div>
+                    <p class="text-base font-medium">Closed</p>
+                </div>
+            </div>
+
+        </div>
+
+
+    </section>
+
+    <section class="w-full md:px-60 max-w-screen-2xl mx-auto">
+        <div class="w-full border">
+
+        </div>
+    </section>
 
     <script src="scripts/home.js"></script>
 </body>
