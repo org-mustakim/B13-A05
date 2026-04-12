@@ -22,7 +22,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 </head>
 
-<body class="md:bg-[#f8fafcFF] md:py-20">
+<body class="md:bg-[#f8fafcFF] md:py-20 border max-w-screen-2xl mx-auto">
+
+
+
     <section class="space-y-6 w-full md:w-[520px] p-8 mx-auto md:rounded-lg bg-white md:shadow-lg">
 
         <div class="flex flex-col items-center  space-y-6">
@@ -40,23 +43,25 @@
             <fieldset class="fieldset rounded-box max-sm:w-11/12 w-4/5 mb-6">
 
                 <label class="label font-medium text-base tex-[#1f2937FF]">Username</label>
-                <input id="input-username" type="text" class="w-full input text-base text-[#64748bFF]"
+                <input id="input-username" type="text"
+                    class="w-full input text-base text-[#64748bFF] shadow-md focus:shadow-xl"
                     placeholder="Enter Username" />
                 <p class="text-primary text-sm mb-4">Default: admin</p>
 
                 <label class="label font-medium text-base tex-[#1f2937FF]">Password</label>
-                <input id="input-password" type="password" class="w-full input text-base text-[#64748bFF]"
+                <input id="input-password" type="password"
+                    class="w-full input text-base text-[#64748bFF] shadow-md focus:shadow-xl"
                     placeholder="Enter Password" />
                 <p class="text-primary text-sm">Default: admin123</p>
 
-                <button id="signin-btn" class="btn btn-primary mt-4">Sign In</button>
+                <button id="signin-btn" class="btn btn-primary mt-4 shadow-xl">Sign In</button>
             </fieldset>
         </div>
 
         <div class="p-10 text-center bg-white flex items-center gap-2">
-            <span class="bg-gray-200 flex-1 h-[1px] w-[204px]"></span>
+            <span class="bg-gray-400/60 flex-1 h-[1px] w-[204px]"></span>
             <span class="text-base text-[#1f2937FF] bg-white mx-2">OR</span>
-            <span class="bg-gray-200 flex-1 h-[1px] w-[204px]"></span>
+            <span class="bg-gray-400/60 flex-1 h-[1px] w-[204px]"></span>
         </div>
         <div class="text-center">
             <p class="text-[#64748bFF]">Demo Credentials:</p>
@@ -66,6 +71,10 @@
             </div>
         </div>
     </section>
+
+
+
+
 
 
     <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
@@ -80,7 +89,13 @@
             </div>
         </div>
     </dialog>
+
+
+
+
     <script src="scripts/index.js"></script>
+
+
 </body>
 
 </html>
