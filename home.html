@@ -67,11 +67,11 @@
                 class="gap-2 btn-container max-md:mx-auto max-lg:flex max-lg:flex-wrap max-lg:items-center max-lg:justify-center">
 
 
-                <button id="btn-1" onclick="activeBtn('btn-1')"
+                <button id="btn-1" onclick="activeBtn('btn-1') ; loadAllIssues()"
                     class="clickable-btn btn btn-primary w-24 max-md:w-[120px] font-semibold">All</button>
-                <button id="btn-2" onclick="activeBtn('btn-2')"
+                <button id="btn-2" onclick="activeBtn('btn-2') ; "
                     class="clickable-btn btn btn-outline w-24 max-md:w-[120px] font-semibold">Open</button>
-                <button id="btn-3" onclick="activeBtn('btn-3')"
+                <button id="btn-3" onclick="activeBtn('btn-3') ; "
                     class="clickable-btn btn btn-outline w-24 max-md:w-[120px] font-semibold">Closed</button>
 
 
@@ -125,7 +125,7 @@
     <section id="loading-container" class="mt-18 p-32">
         <div class="flex flex-col justify-center items-center space-y-3">
             <span class="loading loading-bars loading-xl"></span>
-            <p class="text-3xl font-semibold">Fetching Content ...</p>
+            <p class="text-3xl font-semibold text-center">Fetching Content ...</p>
         </div>
     </section>
 
@@ -134,6 +134,21 @@
             class="max-w-[1110px] mb-16 mx-auto bg-[#fbfbfb] shadow-lg rounded-lg grid md:grid-cols-2 lg:grid-cols-3 max-sm:grid-cols-1  p-6 gap-3">
         </div>
     </section>
+
+
+    <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+            <div id="modal-box-container">
+
+            </div>
+            <div class="modal-action">
+                <form method="dialog">
+                    <button class="btn btn-primary">Close</button>
+                </form>
+            </div>
+        </div>
+    </dialog>
+
 
     <script src="scripts/home.js"></script>
 </body>

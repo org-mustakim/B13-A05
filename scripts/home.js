@@ -14,7 +14,6 @@ const loadingScreen = (value) => {
     }
 }
 
-
 const removeActiveBtn = (element) => {
     const btnContainer = document.querySelectorAll('.clickable-btn')
 
@@ -26,7 +25,6 @@ const removeActiveBtn = (element) => {
         btn.classList.add(...styelsToAdd)
     })
 }
-
 
 const activeBtn = (id) => {
     const btnToGetActive = document.getElementById(id)
@@ -40,21 +38,14 @@ const activeBtn = (id) => {
     btnToGetActive.classList.add(...ActiveBtnStyle)
 }
 
-
 const typeLogo = (obj) => {
-
-
-    const openStyles = ['border-t-4', 'border-t-green-500', 'rounded', 'shadow-md']
-
     if (obj.status === "open") {
         return '<img src="./assets/Open-Status.png">'
-        issueCard.classList.add(...openStyles)
     }
     else {
         return '<img src="../assets/Closed- Status .png">'
     }
 }
-
 
 const date = (date) => {
     const datea = new Date(date)
@@ -63,45 +54,176 @@ const date = (date) => {
 
 }
 
+const displayCardDetails = (obj) => {
+
+
+    const modalBox = document.getElementById('modal-box-container')
+
+    modalBox.innerHTML = `
+
+                <h2 class="text-[#1f2937] text-2xl font-bold mb-2">${obj.title}</h2>
+                <div class="flex items-center gap-2">
+                    <div id="modal-status-container-${obj.id}">
+                    </div>
+                    <div>
+                        <p class="text-[#64748b]">
+                            • <span>Opened</span> by <span>${obj.author}</span> • <span>${date(obj.createdAt)}</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div id="modal-badge-container-${obj.id}" class="mt-6 flex gap-1">
+
+                </div>
+
+                <div>
+                    <p class="text-[#64748b] text-base mt-6">
+                        ${obj.description}
+                    </p>
+                </div>
+
+                <div class="flex mt-7 rounded-lg p-4 bg-[#f8fafc]">
+                    <div class="flex flex-col w-72">
+                        <p class="text-[#64748b]">Assignee:</p>
+                        <p class="text-[#1f2937] text-base font-semibold">${obj.assignee ? obj.assignee : "unassigned"}</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <p class="text-[#64748b]">Priority:</p>
+                        <div id="modal-priority-badge-container-${obj.id}"></div>
+                    </div>
+                </div>
+
+    `
+
+    const modalBadges = () => {
+        const modalBadgeContainer = document.getElementById(`modal-badge-container-${obj.id}`)
+
+        const objLabels = obj.labels
+
+        objLabels.forEach(label => {
+
+            const badge = document.createElement('button')
+
+            const bugStyle = ['rounded-xl', 'badge', 'badge-soft', 'badge-error', 'border-error/30', 'text-xs', 'badge-sm']
+
+            const helpStyle = ['rounded-xl', 'badge', 'badge-soft', 'badge-warning', 'border-warning/30', 'text-xs', 'badge-sm']
+
+            const enhancementStyle = ['rounded-xl', 'badge', 'badge-soft', 'badge-success', 'border-success/30', 'text-xs', 'badge-sm']
+
+            const documentationStyle = ['rounded-xl', 'badge', 'badge-soft', 'badge-info', 'border-info/30', 'text-xs', 'badge-sm']
+
+            const GFIStyle = ['rounded-xl', 'badge', 'badge-soft', 'badge-accent', 'border-accent/30', 'text-xs', 'badge-sm']
+
+            const Label = label.toUpperCase()
+
+            if (label === 'bug') {
+                badge.innerHTML = `<i class= "fa-solid fa-bug" ></i> ${Label}`
+                badge.classList.add(...bugStyle)
+                modalBadgeContainer.appendChild(badge)
+            }
+            else if (label === 'help wanted') {
+                badge.innerHTML = `<i class= "fa-solid fa-circle-radiation" ></i> ${Label}`
+                badge.classList.add(...helpStyle)
+                modalBadgeContainer.appendChild(badge)
+            }
+            else if (label === 'enhancement') {
+                badge.innerHTML = `<i class= "fa-solid fa-star" ></i> ${Label}`
+                badge.classList.add(...enhancementStyle)
+                modalBadgeContainer.appendChild(badge)
+            }
+            else if (label === 'documentation') {
+                badge.innerHTML = `<i  class= "fa-solid fa-file" ></i> ${Label}`
+                badge.classList.add(...documentationStyle)
+                modalBadgeContainer.appendChild(badge)
+            }
+            else if (label === 'good first issue') {
+                badge.innerHTML = `<i class= "fa-solid fa-file" ></i> ${Label}`
+                badge.classList.add(...GFIStyle)
+                modalBadgeContainer.appendChild(badge)
+            }
+        })
+
+    }
+
+    const modalStatus = () => {
+
+        const modalStatusContainer = document.getElementById(`modal-status-container-${obj.id}`)
+
+        const modalStatusBadge = document.createElement('button')
+
+        const openStyles = ['badge', 'badge-active', 'badge-success', 'text-white', 'text-xs', 'font-medium', 'rounded-full']
+
+        const closedStyles = ['badge', 'badge-active', 'badge-error', 'text-white', 'text-xs', 'font-medium', 'rounded-full']
+
+        if (obj.status === "open") {
+            modalStatusContainer.appendChild(modalStatusBadge)
+            modalStatusBadge.innerText = "Opend"
+            modalStatusBadge.classList.add(...openStyles)
+        }
+        else {
+            modalStatusContainer.appendChild(modalStatusBadge)
+            modalStatusBadge.innerText = "Closed"
+            modalStatusBadge.classList.add(...closedStyles)
+        }
+    }
+
+    const modalpriorityBadge = () => {
+        const badge = document.createElement('button')
+
+        badge.innerText = (obj.priority).toUpperCase()
+        const modalpriorityBadgeContainer = document.getElementById(`modal-priority-badge-container-${obj.id}`)
+
+
+        if (obj.priority === "high") {
+            const styelsToAdd = ['badge', 'badge-active', 'badge-error']
+            badge.classList.add(...styelsToAdd)
+            modalpriorityBadgeContainer.appendChild(badge)
+
+        }
+        else if (obj.priority === "medium") {
+            const styelsToAdd = ['badge', 'badge-active', 'badge-warning']
+            badge.classList.add(...styelsToAdd)
+            modalpriorityBadgeContainer.appendChild(badge)
+
+        }
+        else {
+            const styelsToAdd = ['badge', 'badge-active', 'badge-gray-400']
+            badge.classList.add(...styelsToAdd)
+            modalpriorityBadgeContainer.appendChild(badge)
+
+        }
+    }
+
+
+    modalpriorityBadge()
+    modalStatus()
+    modalBadges()
+    my_modal_5.showModal()
+
+}
+
+const loadCardDetails = (id) => {
+    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`)
+        .then(response => response.json())
+        .then(json => displayCardDetails(json.data))
+}
 
 const displayIssues = (arrOfObject) => {
 
     const totalIssue = document.getElementById('total-issue-in-container')
     totalIssue.innerHTML = arrOfObject.length
 
-    const issueCardContainer = document.getElementById('issue-card-container')
-    issueCardContainer.innerHTML = ""
-
-    // {
-    //     "id": 1,
-    //     "title": "Fix navigation menu on mobile devices",
-    //     "description": "The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive behavior.",
-    //     "status": "open",
-    //     "labels": [
-    //         "bug",
-    //         "help wanted"
-    //     ],
-    //     "priority": "high",
-    //     "author": "john_doe",
-    //     "assignee": "jane_smith",
-    //     "createdAt": "2024-01-15T10:30:00Z",
-    //     "updatedAt": "2024-01-15T10:30:00Z"
-    // }
-
-
     arrOfObject.forEach(obj => {
 
-        const id = obj.id
-
-
         const issueCard = document.createElement('div')
+        const issueCardContainer = document.getElementById('issue-card-container')
 
 
         issueCard.innerHTML = `
-        
-        <div id="issue-card-${obj.id}" class="bg-white w-full h-[279px] rounded shadow-md">
 
-            <div class="p-4 space-y-3">
+        <div id="issue-card-${obj.id}" onclick= "loadCardDetails(${obj.id})" class="bg-white w-full h-72 sm:h-[279px] rounded shadow-md">
+
+            <div class="p-4 space-y-2 sm:space-y-3">
 
                 <div class="flex justify-between">
 
@@ -121,7 +243,7 @@ const displayIssues = (arrOfObject) => {
                 </div>
 
                 <div id="issue-badge-container-${obj.id}" class="flex max-lg:flex-wrap gap-1">
-                    
+
                 </div>
 
             </div class="h-[70px]">
@@ -145,8 +267,6 @@ const displayIssues = (arrOfObject) => {
         issueCardContainer.appendChild(issueCard)
 
 
-
-
         const issueBadges = () => {
             const issueBadgeContainer = document.getElementById(`issue-badge-container-${obj.id}`)
 
@@ -165,28 +285,27 @@ const displayIssues = (arrOfObject) => {
                 const Label = label.toUpperCase()
 
                 if (label === 'bug') {
-                    badge.innerHTML = `<i class="fa-solid fa-bug"></i> ${Label}`
+                    badge.innerHTML = `<i class= "fa-solid fa-bug" ></i> ${Label}`
                     badge.classList.add(...bugStyle)
-
                     issueBadgeContainer.appendChild(badge)
                 }
                 else if (label === 'help wanted') {
-                    badge.innerHTML = `<i class="fa-solid fa-circle-radiation"></i> ${Label}`
+                    badge.innerHTML = `<i class= "fa-solid fa-circle-radiation" ></i> ${Label}`
                     badge.classList.add(...helpStyle)
                     issueBadgeContainer.appendChild(badge)
                 }
                 else if (label === 'enhancement') {
-                    badge.innerHTML = `<i class="fa-solid fa-star"></i> ${Label}`
+                    badge.innerHTML = `<i class= "fa-solid fa-star" ></i> ${Label}`
                     badge.classList.add(...enhancementStyle)
                     issueBadgeContainer.appendChild(badge)
                 }
                 else if (label === 'documentation') {
-                    badge.innerHTML = `<i class="fa-solid fa-file"></i> ${Label}`
+                    badge.innerHTML = `<i  class= "fa-solid fa-file" ></i> ${Label}`
                     badge.classList.add(...documentationStyle)
                     issueBadgeContainer.appendChild(badge)
                 }
                 else if (label === 'good first issue') {
-                    badge.innerHTML = `<i class="fa-solid fa-file"></i> ${Label}`
+                    badge.innerHTML = `<i class= "fa-solid fa-file" ></i> ${Label}`
                     badge.classList.add(...GFIStyle)
                     issueBadgeContainer.appendChild(badge)
                 }
@@ -227,14 +346,10 @@ const displayIssues = (arrOfObject) => {
             const closedStyles = ['border-t-4', 'border-t-violet-600', 'rounded', 'shadow-md']
 
             if (obj.status === "open") {
-
                 issueCard.classList.add(...openStyles)
-
-                return '<img src="./assets/Open-Status.png">'
             }
             else {
                 issueCard.classList.add(...closedStyles)
-                return '<img src="../assets/Closed- Status .png">'
             }
         }
 
@@ -247,17 +362,13 @@ const displayIssues = (arrOfObject) => {
     loadingScreen(false)
 }
 
-
 const loadAllIssues = () => {
     fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues')
         .then(response => response.json())
-        .then(json => {
-            displayIssues(json.data)
-        })
+        .then(json => { displayIssues(json.data) })
     loadingScreen(true)
 
 }
 
 
 loadAllIssues()
-
