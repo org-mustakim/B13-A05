@@ -365,6 +365,20 @@ const displayIssues = (arrOfObject) => {
     loadingScreen(false)
 }
 
+const searchIssueBtn = document.getElementById('search-issues-btn').addEventListener('click', () => {
+
+    const inputBar = document.getElementById('input-bar')
+    const inputValue = inputBar.value.toLowerCase().trim()
+
+    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${inputValue}`)
+        .then(response => response.json())
+        .then(json => displayIssues(json.data)
+        )
+    removeActiveBtn()
+    loadingScreen(true)
+
+})
+
 const closedIssues = (arrOfObject) => {
     const filterdIssues = arrOfObject.filter(obj => obj.status === 'closed')
     displayIssues(filterdIssues)
@@ -396,6 +410,7 @@ const loadOpenIssues = () => {
         .then(json => openIssues(json.data))
     loadingScreen(true)
 }
+
 
 
 loadAllIssues()
