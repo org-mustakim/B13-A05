@@ -43,7 +43,7 @@ const typeLogo = (obj) => {
         return '<img src="./assets/Open-Status.png">'
     }
     else {
-        return '<img src="../assets/Closed- Status .png">'
+        return '<img src="./assets/Closed-Status.png">'
     }
 }
 
