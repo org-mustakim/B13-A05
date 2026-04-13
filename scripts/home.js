@@ -212,11 +212,14 @@ const displayIssues = (arrOfObject) => {
 
     const totalIssue = document.getElementById('total-issue-in-container')
     totalIssue.innerHTML = arrOfObject.length
+    const issueCardContainer = document.getElementById('issue-card-container')
 
+    issueCardContainer.innerHTML = ""
     arrOfObject.forEach(obj => {
 
         const issueCard = document.createElement('div')
-        const issueCardContainer = document.getElementById('issue-card-container')
+
+
 
 
         issueCard.innerHTML = `
@@ -362,12 +365,36 @@ const displayIssues = (arrOfObject) => {
     loadingScreen(false)
 }
 
+const closedIssues = (arrOfObject) => {
+    const filterdIssues = arrOfObject.filter(obj => obj.status === 'closed')
+    displayIssues(filterdIssues)
+}
+
+const openIssues = (arrOfObject) => {
+    const filterdIssues = arrOfObject.filter(obj => obj.status === 'open')
+    displayIssues(filterdIssues)
+
+}
+
 const loadAllIssues = () => {
     fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues')
         .then(response => response.json())
-        .then(json => { displayIssues(json.data) })
+        .then(json => displayIssues(json.data))
     loadingScreen(true)
+}
 
+const loadClosedIssues = () => {
+    fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues')
+        .then(response => response.json())
+        .then(json => closedIssues(json.data))
+    loadingScreen(true)
+}
+
+const loadOpenIssues = () => {
+    fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues')
+        .then(response => response.json())
+        .then(json => openIssues(json.data))
+    loadingScreen(true)
 }
 
 
